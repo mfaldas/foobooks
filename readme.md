@@ -1,3 +1,3 @@
-# Practice work
-+ By: *your first and last name*
+# Practice Work
++ By: Marc-Eli Faldas
 + Production URL: <http://foobooks.dwa15marcelifaldas.win>
