@@ -2,6 +2,8 @@
 
 return [
 
+    'supportEmail' => 'help@foobooks.dwa15marcelifaldas.win',
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -13,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => 'Foobooks',
 
     /*
     |--------------------------------------------------------------------------
