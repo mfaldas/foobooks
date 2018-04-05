@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Foobooks</title>
-</head>
-<body>
+@extends('layouts.master')
 
-    <h1>Welcome to Foobooks</h1>
+@section('title')
+    Welcome to Foobooks
+@endsection
 
-</body>
-</html>
+@section('content')
+    <h1>Welcome</h1>
+    <p>
+        Foobooks is simple book organizer, used to catalog all your favorite reads.
+    </p>
+    <p>
+        Choose a feature above to get started.
+    </p>
+@endsection
