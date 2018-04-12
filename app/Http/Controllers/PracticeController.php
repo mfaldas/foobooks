@@ -7,9 +7,74 @@ use Config;
 use App;
 use Debugbar;
 use IanLChapman\PigLatinTranslator\Parser;
+use App\Book;
 
 class PracticeController extends Controller
 {
+
+    public function practice11() {
+        $book = Book::where('author', '=', 'F. Scott Fitzgerald')->first();
+
+        if (!$book) {
+            dump('Did not delete- Book not found.');
+        } else {
+            $book->delete();
+            dump('Deletion complete; check the database to see if it worked...');
+        }
+    }
+
+    public function practice10() {
+        # First get a book to update
+        $book = Book::where('author', '=', 'F. Scott Fitzgerald')->first();
+
+        if (!$book) {
+            dump("Book not found, can't update.");
+        } else {
+            # Change some properties
+            $book->title = 'The Really Great Gatsby';
+            $book->published_year = '2025';
+
+            # Save the changes
+            $book->save();
+
+            dump('Update complete; check the database to confirm the update worked.');
+        }
+
+    }
+
+    public function practice8()
+    {
+        $book = new Book();
+        $books = Book::where('title', 'LIKE', '%Harry Potter%')->get();
+
+        if ($books->isEmpty()) {
+            dump('No matches found');
+        } else {
+            foreach ($books as $book) {
+                dump($book->title);
+            }
+        }
+    }
+
+    public function practice7()
+    {
+        $book = new Book();
+
+        # Set the properties
+        # Note how each property corresponds to a field in the table
+        $book->title = 'Harry Potter and the Sorcerer\'s Stone';
+        $book->author = 'J.K. Rowling';
+        $book->published_year = 1997;
+        $book->cover_url = 'http://prodimage.images-bn.com/pimages/9780590353427_p0_v1_s484x700.jpg';
+        $book->purchase_url = 'http://www.barnesandnoble.com/w/harry-potter-and-the-sorcerers-stone-j-k-rowling/1100036321?ean=9780590353427';
+
+        # Invoke the Eloquent `save` method to generate a new row in the
+        # `books` table, with the above data
+        $book->save();
+
+        dump($book);
+    }
+
     public function practice5()
     {
         $translator = new Parser();
@@ -21,7 +86,7 @@ class PracticeController extends Controller
     {
         $data = ['foo' => 'bar'];
         Debugbar::info($data);
-        Debugbar::info('Current environment: '.App::environment());
+        Debugbar::info('Current environment: ' . App::environment());
         Debugbar::error('Error!');
         Debugbar::warning('Watch out…');
         Debugbar::addMessage('Another message', 'mylabel');
@@ -76,10 +141,12 @@ class PracticeController extends Controller
                     $methods[] = $method;
                 }
             }
+
             return view('practice')->with(['methods' => $methods]);
         } # Otherwise, load the requested method
         else {
             $method = 'practice' . $n;
+
             return (method_exists($this, $method)) ? $this->$method() : abort(404);
         }
     }
